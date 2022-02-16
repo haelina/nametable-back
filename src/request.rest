@@ -1,0 +1,7 @@
+GET https://nametable-hs.herokuapp.com/api/people
+
+###
+
+GET https://nametable-hs.herokuapp.com/api/people/1
+
+###
