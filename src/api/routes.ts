@@ -19,6 +19,8 @@ routes.get("/:idNumber(-?[0-9]+)", (req: Request, res: Response) => {
   res.send("Person with id: " + req.params.idNumber);
 });
 
-routes.delete("/idNumber(-?[0-9]+)");
+routes.delete("/idNumber(-?[0-9]+)", (req: Request, res: Response) => {
+  res.send("Removing person with id: " + req.params.idNumber);
+});
 
 export default routes;
