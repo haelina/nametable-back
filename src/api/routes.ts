@@ -33,7 +33,11 @@ routes.get("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
 
 routes.post("/", async (req: Request, res: Response) => {
   try {
-    const result = await database.addPerson(req.body);
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const age = req.body.age;
+    const result = await database.addPerson({ firstName, lastName, age });
+    console.log(req.body);
     res.send(result);
   } catch (e) {
     console.log(e);
