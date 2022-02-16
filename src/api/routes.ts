@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import Person from "../person";
+import database from "../database/connection";
 
 let people: Person[] = [
   { id: 1, firstName: "Jukka", lastName: "Virtanen", age: 30 },
@@ -10,8 +11,13 @@ let people: Person[] = [
 const routes = Router();
 
 // Get all people
-routes.get("/", (req: Request, res: Response) => {
-  res.send(people);
+routes.get("/", async (req: Request, res: Response) => {
+  try {
+    res.send(await database.findAll());
+  } catch (e) {
+    res.statusCode = 500;
+    res.end();
+  }
 });
 
 // Get one person
