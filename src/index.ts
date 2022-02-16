@@ -4,7 +4,7 @@ import routes from "./api/routes";
 const app: Application = express();
 const port = 8080; // default port to listen
 
-app.use("/api/", routes);
+app.use("/api/people", routes);
 
 // define a route handler for the default home page
 app.get("/", (req: Request, res: Response) => {
