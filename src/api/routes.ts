@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import express, { Router, Request, Response } from "express";
 import Person from "../person";
 import database from "../database/connection";
 
@@ -9,6 +9,7 @@ let people: Person[] = [
 ];
 
 const routes = Router();
+routes.use(express.json());
 
 // Get all people
 routes.get("/", async (req: Request, res: Response) => {
@@ -21,12 +22,34 @@ routes.get("/", async (req: Request, res: Response) => {
 });
 
 // Get one person
-routes.get("/:idNumber(-?[0-9]+)", (req: Request, res: Response) => {
-  res.send("Person with id: " + req.params.idNumber);
+routes.get("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
+  try {
+    res.send(await database.findById(Number(req.params.idNumber)));
+  } catch (e) {
+    res.statusCode = 500;
+    res.end();
+  }
 });
 
-routes.delete("/idNumber(-?[0-9]+)", (req: Request, res: Response) => {
-  res.send("Removing person with id: " + req.params.idNumber);
+routes.post("/", async (req: Request, res: Response) => {
+  try {
+    const result = await database.addPerson(req.body);
+    res.send(result);
+  } catch (e) {
+    console.log(e);
+    res.end();
+  }
+});
+
+routes.delete("/idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
+  try {
+    await database.deleteById(Number(req.params.idNumber));
+    res.statusCode = 204;
+    res.end();
+  } catch (err) {
+    res.statusCode = 500;
+    res.end();
+  }
 });
 
 export default routes;
