@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/haelina/nametable-back/issues"
   },
-  "homepage": "https://github.com/haelina/nametable-back#readme"
+  "homepage": "https://github.com/haelina/nametable-back#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
