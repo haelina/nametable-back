@@ -5,3 +5,11 @@ GET https://nametable-hs.herokuapp.com/api/people
 GET https://nametable-hs.herokuapp.com/api/people/1
 
 ###
+
+POST https://nametable-hs.herokuapp.com/api/people
+Content-Type: application/json
+{"firstName": "Mika", "lastName": "Poutanen", "age": 37}
+
+###
+
+DELETE https://nametable-hs.herokuapp.com/api/people/11
