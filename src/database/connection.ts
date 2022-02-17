@@ -53,7 +53,7 @@ const connectionFunctions = {
       if (connection) {
         connection.query(
           "INSERT INTO * FROM person (firstName, lastName, age) VALUES (?, ?, ?)",
-          (p.firstName, p.lastName, p.age),
+          [p.firstName, p.lastName, p.age],
           (error, result) => {
             if (error) {
               reject(error);

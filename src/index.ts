@@ -12,7 +12,7 @@ app.use(cors());
 
 // parse incoming request body and append data to `req.body`
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // connecting front to backend
 app.use(express.static(path.join(__dirname, "../build")));
