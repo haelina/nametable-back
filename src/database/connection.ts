@@ -68,6 +68,28 @@ const connectionFunctions = {
       }
     });
   },
+
+  modifyPerson: (p: Person) => {
+    return new Promise<string>((resolve, reject) => {
+      if (connection) {
+        connection.query(
+          "UPDATE person SET firstName=?, lastName=?, age=? WHERE id=?",
+          [p.firstName, p.lastName, p.age, p.id],
+          (error, result) => {
+            if (error) {
+              reject(error);
+            } else {
+              console.log(result);
+              resolve(`Update successful`);
+            }
+          }
+        );
+      } else {
+        reject(`No connection. Could not add new person.`);
+      }
+    });
+  },
+
   deleteById: (id: number) => {
     return new Promise<string>((resolve, reject) => {
       if (connection) {
