@@ -49,6 +49,25 @@ routes.post("/", async (req: Request, res: Response) => {
   }
 });
 
+routes.put("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
+  try {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const age = req.body.age;
+    const result = await database.addPerson({
+      id: Number(req.params.idNumber),
+      firstName,
+      lastName,
+      age,
+    });
+    console.log(req.body);
+    res.send(result);
+  } catch (e) {
+    console.log("Error in routes.post" + e);
+    res.end();
+  }
+});
+
 routes.delete("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
   try {
     console.log("In routes.delete, begin deleting");
