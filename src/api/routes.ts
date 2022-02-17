@@ -11,8 +11,8 @@ let people: Person[] = [
 
 const routes = Router();
 // parse incoming request body and append data to `req.body`
-routes.use(bodyParser.json());
-routes.use(bodyParser.urlencoded({ extended: false }));
+//routes.use(bodyParser.json());
+//routes.use(bodyParser.urlencoded({ extended: false }));
 //routes.use(express.json());
 
 // Get all people
@@ -42,15 +42,16 @@ routes.post("/", async (req: Request, res: Response) => {
     const age = req.body.age;
     const result = await database.addPerson({ firstName, lastName, age });
     console.log(req.body);
-    res.send("Handling post");
+    res.send(result);
   } catch (e) {
     console.log("Error in routes.post" + e);
     res.end();
   }
 });
 
-routes.delete("/idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
+routes.delete("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
   try {
+    console.log("In routes.delete, begin deleting");
     await database.deleteById(Number(req.params.idNumber));
     res.statusCode = 204;
     res.end();
