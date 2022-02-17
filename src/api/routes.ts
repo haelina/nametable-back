@@ -9,7 +9,7 @@ let people: Person[] = [
 ];
 
 const routes = Router();
-routes.use(express.json());
+//routes.use(express.json());
 
 // Get all people
 routes.get("/", async (req: Request, res: Response) => {
