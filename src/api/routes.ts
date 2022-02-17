@@ -54,13 +54,12 @@ routes.put("/:idNumber(-?[0-9]+)", async (req: Request, res: Response) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const age = req.body.age;
-    const result = await database.addPerson({
+    const result = await database.modifyPerson({
       id: Number(req.params.idNumber),
       firstName,
       lastName,
       age,
     });
-    console.log(req.body);
     res.send(result);
   } catch (e) {
     console.log("Error in routes.post" + e);
