@@ -3,12 +3,16 @@ import routes from "./api/routes";
 import cors from "cors";
 import path from "path";
 import database from "./database/connection";
+import bodyParser from "body-parser";
 
 const app: Application = express();
 const port = process.env.PORT || 8080;
 
 app.use(cors());
-app.use(express.json());
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // connecting front to backend
 app.use(express.static(path.join(__dirname, "../build")));
