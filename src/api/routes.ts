@@ -1,6 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import Person from "../person";
 import database from "../database/connection";
+import bodyParser from "body-parser";
 
 let people: Person[] = [
   { id: 1, firstName: "Jukka", lastName: "Virtanen", age: 30 },
@@ -9,6 +10,9 @@ let people: Person[] = [
 ];
 
 const routes = Router();
+// parse incoming request body and append data to `req.body`
+//routes.use(bodyParser.json());
+//routes.use(bodyParser.urlencoded({ extended: false }));
 //routes.use(express.json());
 
 // Get all people
@@ -36,7 +40,7 @@ routes.post("/", async (req: Request, res: Response) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const age = req.body.age;
-    const result = await database.addPerson({ firstName, lastName, age });
+    const result = await database.addPerson(req.body);
     console.log(req.body);
     res.send(result);
   } catch (e) {
