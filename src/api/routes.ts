@@ -13,7 +13,7 @@ const routes = Router();
 // parse incoming request body and append data to `req.body`
 //routes.use(bodyParser.json());
 //routes.use(bodyParser.urlencoded({ extended: false }));
-//routes.use(express.json());
+routes.use(express.json());
 
 // Get all people
 routes.get("/", async (req: Request, res: Response) => {
