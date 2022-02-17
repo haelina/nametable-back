@@ -11,9 +11,9 @@ let people: Person[] = [
 
 const routes = Router();
 // parse incoming request body and append data to `req.body`
-//routes.use(bodyParser.json());
-//routes.use(bodyParser.urlencoded({ extended: false }));
-routes.use(express.json());
+routes.use(bodyParser.json());
+routes.use(bodyParser.urlencoded({ extended: false }));
+//routes.use(express.json());
 
 // Get all people
 routes.get("/", async (req: Request, res: Response) => {
@@ -40,9 +40,9 @@ routes.post("/", async (req: Request, res: Response) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const age = req.body.age;
-    const result = await database.addPerson(req.body);
+    const result = await database.addPerson({ firstName, lastName, age });
     console.log(req.body);
-    res.json(result);
+    res.send(result);
   } catch (e) {
     console.log(e);
     res.end();
