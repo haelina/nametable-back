@@ -42,7 +42,7 @@ routes.post("/", async (req: Request, res: Response) => {
     const age = req.body.age;
     const result = await database.addPerson(req.body);
     console.log(req.body);
-    res.send(result);
+    res.json(result);
   } catch (e) {
     console.log(e);
     res.end();
