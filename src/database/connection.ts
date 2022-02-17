@@ -49,7 +49,7 @@ const connectionFunctions = {
   },
 
   addPerson: (p: Person) => {
-    return new Promise<Person>((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       if (connection) {
         connection.query(
           "INSERT INTO person (firstName, lastName, age) VALUES (?, ?, ?)",
@@ -58,7 +58,8 @@ const connectionFunctions = {
             if (error) {
               reject(error);
             } else {
-              resolve(result.insertId);
+              console.log(result);
+              resolve(`Created. ID: ${result.insertId}`);
             }
           }
         );
