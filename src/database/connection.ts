@@ -72,7 +72,7 @@ const connectionFunctions = {
       if (connection) {
         connection.query(
           "DELETE FROM person WHERE id=?",
-          id,
+          [id],
           (error, result) => {
             if (error) {
               reject(error);
